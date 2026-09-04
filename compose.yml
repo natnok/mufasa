@@ -1,0 +1,20 @@
+services:
+    db:
+        image:
+            postgres:18
+        ports:
+            - "5432:5432"
+        env_file:
+            - ".env.prod"
+        networks:
+            - my_network
+        volumes:
+            - db_prod_data:/var/lib/postgresql
+
+
+
+
+networks:
+    my_network:
+volumes:
+    db_prod_data:
