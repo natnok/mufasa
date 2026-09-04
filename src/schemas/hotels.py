@@ -6,7 +6,7 @@ class HotelsPost(BaseModel):
     stars: str
 
 
-class HotelsPacth(BaseModel):
+class HotelsPatch(BaseModel):
     title: str | None = None
     stars: str | None = None
 

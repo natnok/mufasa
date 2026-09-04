@@ -6,7 +6,7 @@ class RoomsPost(BaseModel):
     description: str
 
 
-class RoomsPacth(BaseModel):
+class RoomsPatch(BaseModel):
     number: int | None = None
     description: str | None = None
 
