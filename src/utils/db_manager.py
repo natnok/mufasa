@@ -12,7 +12,7 @@ class DBManager:
         self.session: AsyncSession = self.session_factory()
 
         self.hotels = HotelsRepository(self.session)
-        self.room = RoomsRepository(self.session)
+        self.rooms = RoomsRepository(self.session)
 
         return self
 
