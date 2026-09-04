@@ -5,8 +5,11 @@ from src.database import Base
 
 
 class BaseRepository:
-    schema: Base
-    model: BaseModel
+    def __init__(self, session):
+        self.session = session
+
+    schema: type[BaseModel]
+    model: type[Base]
     session: AsyncSession
 
     async def get_all(self):
