@@ -17,5 +17,5 @@ class RoomsData(RoomsPost):
     model_config = ConfigDict(from_attributes=True)
 
 
-class RoomsResponce(RoomsData):
+class RoomsResponse(RoomsData):
     pass

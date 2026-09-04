@@ -3,12 +3,12 @@ from pydantic import BaseModel, ConfigDict
 
 class HotelsPost(BaseModel):
     title: str
-    stars: str
+    stars: int
 
 
 class HotelsPatch(BaseModel):
     title: str | None = None
-    stars: str | None = None
+    stars: int | None = None
 
 
 class HotelsData(HotelsPost):
@@ -17,5 +17,5 @@ class HotelsData(HotelsPost):
     model_config = ConfigDict(from_attributes=True)
 
 
-class HotelsResponce(HotelsData):
+class HotelsResponse(HotelsData):
     pass
