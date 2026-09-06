@@ -1,8 +1,12 @@
+from typing import Literal
+
 from pydantic import PostgresDsn, computed_field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    MODE: Literal["PROD", "TEST"]
+
     model_config = SettingsConfigDict(env_file=".env.prod")
 
     app_title: str = "mufasa"
