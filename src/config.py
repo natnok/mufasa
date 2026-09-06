@@ -12,6 +12,10 @@ class Settings(BaseSettings):
     app_port: int = 8000
     app_reload: bool = True
 
+    JWT_SECRET_KEY: str
+    JWT_ALGORITHM: str
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int
+
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_HOST: str
