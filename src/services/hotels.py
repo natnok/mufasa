@@ -1,21 +1,30 @@
+from src.schemas.hotels import HotelsPatch, HotelsPost
 from src.services.base import BaseService
 
 
 class HotelsService(BaseService):
     async def get_all(self):
-        pass
+        return await self.db.hotels.get_all()
 
-    async def get_one_or_none(self):
-        pass
+    async def get_one_or_none(self, hotel_id: int):
+        return await self.db.hotels.get_one_or_none(hotel_id=hotel_id)
 
-    async def post(self):
-        pass
+    async def post(self, data: HotelsPost):
+        hotel = await self.db.hotels.post(data=data)
+        await self.db.commit()
+        return hotel
 
-    async def put(self):
-        pass
+    async def put(self, data: HotelsPost, hotel_id: int):
+        hotel = await self.db.hotels.put(data=data, hotel_id=hotel_id)
+        await self.db.commit()
+        return hotel
 
-    async def patch(self):
-        pass
+    async def patch(self, data: HotelsPatch, hotel_id: int, exclude_unset: bool = True):
+        hotel = await self.db.hotels.put(data=data, hotel_id=hotel_id, exclude_unset=exclude_unset)
+        await self.db.commit()
+        return hotel
 
-    async def delete(self):
-        pass
+    async def delete(self, hotel_id: int):
+        hotel = await self.db.hotels.delete(hotel_id=hotel_id)
+        await self.db.commit()
+        return hotel
