@@ -1,0 +1,26 @@
+services:
+
+
+    db_prod:
+        image:
+            postgres:18
+        ports:
+            - "5432:5432"
+        env_file:
+            - ".env.prod"
+        networks:
+            - my_network
+        volumes:
+            - db_pro_data:/var/lib/postgrsql
+        healthcheck:
+            test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+            interval: 5s
+            timeout: 5s
+            retries: 5
+
+
+networks:
+    my_network:
+
+volumes:
+    db_pro_data:
