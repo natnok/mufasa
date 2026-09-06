@@ -1,18 +1,25 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict, EmailStr
+
+
+class UsersPostRequest(BaseModel):
+    email: EmailStr
+    password: str
 
 
 class UsersPost(BaseModel):
-    email: str
-    hashed_pawwsord: str
+    email: EmailStr
+    hashed_password: str
 
 
 class UsersPatch(BaseModel):
-    email: str | None = None
-    hashed_pawwsord: str | None = None
+    email: EmailStr | None = None
+    hashed_password: str | None = None
 
 
 class UsersData(UsersPost):
-    users_id: int
+    user_id: int
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UsersResponse(UsersData):

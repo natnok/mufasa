@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class RoomsPost(BaseModel):
@@ -13,6 +13,8 @@ class RoomsPatch(BaseModel):
 
 class RoomsData(RoomsPost):
     room_id: int
+
+    model_config = ConfigDict(from_attributes=True)
 
 
 class RoomsResponse(RoomsData):

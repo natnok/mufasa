@@ -8,6 +8,6 @@ from src.database import Base
 class UsersORM(Base):
     __tablename__ = "users"
 
-    users_id: Mapped[int] = mapped_column(primary_key=True)
+    user_id: Mapped[int] = mapped_column(primary_key=True)
     email: Mapped[EmailStr] = mapped_column(String(200))
-    hashed_pawwsord: Mapped[str] = mapped_column()
+    hashed_password: Mapped[str] = mapped_column()
