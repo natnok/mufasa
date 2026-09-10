@@ -10,7 +10,7 @@ services:
         networks:
             - my_network
         volumes:
-            - db_pro_data:/var/lib/postgrsql
+            - db_prod_data:/var/lib/postgrsql
         healthcheck:
             test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
             interval: 5s
@@ -29,14 +29,45 @@ services:
         depends_on:
             db_prod:
                 condition: service_healthy
+            redis:
+                condition: service_started
         command:
             ["sh", "-c", "python3 -m alembic upgrade head && python3 -m src.main "]
 
+    redis:
+        image:
+            redis:latest
+        ports:
+            - "6379:6379"
+        env_file:
+            - ".env.prod"
+        networks:
+            - my_network
+        volumes:
+            - redis_data:/data
 
+    celery_worker:
+        build:
+            .
+        env_file:
+            - ".env.prod"
+        networks:
+            - my_network
+        command: ["sh", "-c", "celery --app=src.tasks.celery_app:celery_instance worker -l info"]
+
+    celery_beat:
+        build:
+            .
+        env_file:
+            - ".env.prod"
+        networks:
+            - my_network
+        command: ["sh", "-c", "celery --app=src.tasks.celery_app:celery_instance beat -l info"]
 
 
 networks:
     my_network:
 
 volumes:
-    db_pro_data:
+    db_prod_data:
+    redis_data:
