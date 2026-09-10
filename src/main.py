@@ -34,5 +34,3 @@ if __name__ == "__main__":
         port=settings.app_port,
         reload=settings.app_reload,
     )
-
-!!!_very_fix_!!!
